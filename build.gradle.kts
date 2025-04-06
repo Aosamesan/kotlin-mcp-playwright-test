@@ -14,10 +14,17 @@ repositories {
 
 dependencies {
     val mcpVersion: String by project
+    val playwrightVersion: String by project
+    val cliktVersion: String by project
+    val ktorClientVersion: String by project
 
     implementation("io.modelcontextprotocol:kotlin-sdk:$mcpVersion")
-    implementation("com.microsoft.playwright:playwright:1.51.0")
-    implementation("com.github.ajalt.clikt:clikt:5.0.1")
+    implementation("com.microsoft.playwright:playwright:$playwrightVersion")
+    implementation("com.github.ajalt.clikt:clikt:$cliktVersion")
+    implementation("io.ktor:ktor-client-core:$ktorClientVersion")
+    implementation("io.ktor:ktor-client-cio:$ktorClientVersion")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktorClientVersion")
+    implementation("io.ktor:ktor-client-cio-jvm:3.1.2")
     testImplementation(kotlin("test"))
 }
 
