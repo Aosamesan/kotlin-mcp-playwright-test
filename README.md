@@ -1,11 +1,11 @@
 ## Build
 ### Linux/macOS
 ```shell
-./gradlew -x test shadowJar
+./gradlew -x test buildFatJar
 ```
 ### Windows
 ```shell
-./gradlew.bat -x test shadowJar
+./gradlew.bat -x test buildFatJar
 ```
 
 ### Config (QuickStart)

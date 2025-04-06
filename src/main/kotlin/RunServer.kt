@@ -148,6 +148,31 @@ class MCPServer : CliktCommand() {
             )
         }
 
+        server.addTool(
+            name = "execute-javascript",
+            description = "Execute JavaScript in the tab identified by UUID.",
+            inputSchema = Tool.Input(
+                properties = JsonObject(mapOf("uuid" to JsonPrimitive("string"), "script" to JsonPrimitive("string"))),
+                required = listOf("uuid", "script")
+            )
+        ) { request ->
+            val uuid = request.arguments["uuid"]?.jsonPrimitive?.contentOrNull
+                ?: return@addTool CallToolResult(
+                    content = listOf(
+                        TextContent("The 'uuid' parameter is required.")
+                    )
+                )
+            val script = request.arguments["script"]?.jsonPrimitive?.contentOrNull
+                ?: return@addTool CallToolResult(
+                    content = listOf(
+                        TextContent("The 'script' parameter is required.")
+                    )
+                )
+            CallToolResult(
+                content = listOf(TextContent(PlaywrightHelper.executeJavaScript(uuid, script).toString()))
+            )
+        }
+
         runBlocking {
             server.connect(transport)
             val done = Job()

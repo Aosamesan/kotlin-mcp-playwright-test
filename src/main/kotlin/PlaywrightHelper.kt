@@ -55,6 +55,12 @@ object PlaywrightHelper : AutoCloseable {
         }.navigate(url)
     }
 
+    fun executeJavaScript(uuid: String, script: String): Any? {
+        return requireNotNull(PageMap[uuid]) {
+            "Tab named '$uuid' does not exist"
+        }.evaluate(script)
+    }
+
     override fun close() {
         try {
             Browser.close()
